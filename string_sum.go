@@ -1,7 +1,10 @@
-package string_sum
+package main
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -23,5 +26,33 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+	input = strings.TrimSpace(input)
+	if input == "" {
+		return "", fmt.Errorf("Nothing to calculate.\n%w", errorEmptyInput)
+	}
+
+	var dmtr string
+	if strings.Contains(input, "+") {
+		dmtr = "+"
+	} else {
+		dmtr = "-"
+	}
+	sl := strings.Split(input, dmtr)
+
+	if len(sl) == 1 || len(sl) > 2 {
+		fmt.Println(len(sl))
+		return "", fmt.Errorf("Expression has number of operands not equal to two.\n%w", errorNotTwoOperands)
+	}
+
+	firstOperand, err := strconv.Atoi(sl[0])
+	if err != nil {
+		return "", fmt.Errorf("First operand is not valid.\n%w", err)
+	}
+
+	secondOperand, err := strconv.Atoi(sl[1])
+	if err != nil {
+		return "", fmt.Errorf("Second operand is not valid.\n%w", err)
+	}
+
+	return strconv.Itoa(firstOperand + secondOperand), nil
 }
