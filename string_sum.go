@@ -54,9 +54,5 @@ func StringSum(input string) (output string, err error) {
 		return "", fmt.Errorf("Second operand is not valid.\n%w", err)
 	}
 
-	output, err := strconv.Itoa(firstOperand + secondOperand)
-	if err != nil {
-		return "", fmt.Errorf("Something go wrong.\n%w", err)
-	}
-	return output, nil
+	return strconv.Itoa(firstOperand + secondOperand), nil
 }
