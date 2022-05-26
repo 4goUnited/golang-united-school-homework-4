@@ -28,10 +28,10 @@ var (
 
 func StringSum(input string) (string, error) {
 
-	input = strings.TrimSpace(input)
-	if input == "" {
-		return "", fmt.Errorf("Nothing to calculate. %w", errorEmptyInput)
-	}
+        input = strings.ReplaceAll(input, " ", "")
+        if len(input) == 0 {
+                return "", fmt.Errorf("Nothing to calculate. %w", errorEmptyInput)
+        }
 
 	re := regexp.MustCompile(`[+-]?\d+[^+-]`)
 	sl := re.FindAllString(input, -1)
